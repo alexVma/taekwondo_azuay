@@ -18,8 +18,8 @@ class HomeAction {
         label: 'Torneos', icon: Icons.emoji_events_outlined, isPrimary: true),
     HomeAction(
         label: 'Academias', icon: Icons.location_on_outlined, isPrimary: false),
-    HomeAction(
-        label: 'Noticias', icon: Icons.newspaper_rounded, isPrimary: false),
+   /* HomeAction(
+        label: 'Noticias', icon: Icons.newspaper_rounded, isPrimary: false),*/
   ];
 }
 

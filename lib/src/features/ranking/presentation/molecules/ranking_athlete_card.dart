@@ -163,7 +163,7 @@ class _AthleteSummary extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 3),
             child: Text(
-              'CADETES - NEGRO',
+              '',//athlete.,
               style: Theme.of(context).textTheme.labelSmall?.copyWith(
                     color: EliteMartialColors.onSurface,
                     fontSize: 8,
@@ -221,7 +221,7 @@ class _ChampionRibbon extends StatelessWidget {
         borderRadius: BorderRadius.only(bottomLeft: Radius.circular(8)),
       ),
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 7),
+        padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 4),
         child: Text(
           'CHAMPION',
           style: Theme.of(context).textTheme.labelSmall?.copyWith(

@@ -8,7 +8,6 @@ class RankingAthlete {
     required this.points,
     required this.badgeColor,
     required this.isChampion,
-    required this.avatarSeed,
     this.imageUrl,
   });
 
@@ -18,7 +17,6 @@ class RankingAthlete {
   final int points;
   final Color badgeColor;
   final bool isChampion;
-  final Color avatarSeed;
   final String? imageUrl;
 
   static const cadets = <RankingAthlete>[
@@ -29,7 +27,6 @@ class RankingAthlete {
       points: 850,
       badgeColor: Color(0xffffc400),
       isChampion: true,
-      avatarSeed: Color(0xff163344),
     ),
     RankingAthlete(
       position: 2,
@@ -38,7 +35,6 @@ class RankingAthlete {
       points: 720,
       badgeColor: Color(0xffb8b8b8),
       isChampion: false,
-      avatarSeed: Color(0xffa8171c),
     ),
     RankingAthlete(
       position: 3,
@@ -47,7 +43,6 @@ class RankingAthlete {
       points: 685,
       badgeColor: Color(0xffc47a2c),
       isChampion: false,
-      avatarSeed: Color(0xff143340),
     ),
   ];
 }
