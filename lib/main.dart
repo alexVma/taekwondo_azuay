@@ -16,8 +16,8 @@ Future<void> main() async {
 
   await initDependencies();
 //
-  final importer = RankingImporter();
+ /* final importer = RankingImporter();
 
-  await importer.importar();
+  await importer.importar();*/
   runApp(const TaekwondoAzuayApp());
 }
