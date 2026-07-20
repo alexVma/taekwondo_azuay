@@ -9,6 +9,7 @@ class RankingAthlete {
     required this.badgeColor,
     required this.isChampion,
     required this.avatarSeed,
+    this.imageUrl,
   });
 
   final int position;
@@ -18,6 +19,7 @@ class RankingAthlete {
   final Color badgeColor;
   final bool isChampion;
   final Color avatarSeed;
+  final String? imageUrl;
 
   static const cadets = <RankingAthlete>[
     RankingAthlete(

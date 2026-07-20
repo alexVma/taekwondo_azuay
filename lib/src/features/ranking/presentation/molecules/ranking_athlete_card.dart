@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:taekwondo_azuay/src/core/theme/elite_martial_colors.dart';
 import 'package:taekwondo_azuay/src/core/theme/elite_martial_radii.dart';
@@ -40,7 +41,7 @@ class RankingAthleteCard extends StatelessWidget {
                 children: [
                   _PositionBadge(athlete: athlete),
                   const SizedBox(width: EliteMartialSpacing.md),
-                  _AthletePortrait(seed: athlete.avatarSeed),
+                  _AthletePortrait(imageUrl: athlete.imageUrl),
                   const SizedBox(width: EliteMartialSpacing.md),
                   Expanded(child: _AthleteSummary(athlete: athlete)),
                   const SizedBox(width: EliteMartialSpacing.sm),
@@ -50,6 +51,47 @@ class RankingAthleteCard extends StatelessWidget {
             ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class _AthletePortrait extends StatelessWidget {
+  const _AthletePortrait({required this.imageUrl});
+
+  final String? imageUrl;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 56,
+      height: 56,
+      decoration: BoxDecoration(
+        color: EliteMartialColors.surfaceContainerHigh,
+        shape: BoxShape.circle,
+        border: Border.all(color: const Color(0xffd7dbe2)),
+      ),
+      child: ClipOval(
+        child: imageUrl != null
+            ? CachedNetworkImage(
+                imageUrl: imageUrl!,
+                fit: BoxFit.cover,
+                placeholder: (context, url) => const Center(
+                  child: SizedBox(
+                    width: 24,
+                    height: 24,
+                    child: CircularProgressIndicator(strokeWidth: 2),
+                  ),
+                ),
+                errorWidget: (context, url, error) => const Icon(
+                  Icons.person,
+                  color: EliteMartialColors.primary,
+                ),
+              )
+            : const Icon(
+                Icons.person,
+                color: EliteMartialColors.primary,
+              ),
       ),
     );
   }
@@ -79,50 +121,6 @@ class _PositionBadge extends StatelessWidget {
   }
 }
 
-class _AthletePortrait extends StatelessWidget {
-  const _AthletePortrait({required this.seed});
-
-  final Color seed;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: 58,
-      height: 58,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(7),
-        gradient: LinearGradient(
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-          colors: [seed, EliteMartialColors.primary],
-        ),
-      ),
-      child: Stack(
-        alignment: Alignment.center,
-        children: [
-          const Positioned(
-            top: 9,
-            child: Icon(Icons.person_rounded, color: Colors.white, size: 30),
-          ),
-          Positioned(
-            bottom: 8,
-            child: Container(
-              width: 36,
-              height: 22,
-              decoration: BoxDecoration(
-                color: Colors.white.withValues(alpha: .88),
-                borderRadius: const BorderRadius.vertical(
-                  top: Radius.circular(14),
-                  bottom: Radius.circular(3),
-                ),
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
 
 class _AthleteSummary extends StatelessWidget {
   const _AthleteSummary({required this.athlete});
