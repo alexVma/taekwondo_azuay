@@ -338,7 +338,7 @@ Este proyecto está bajo la Licencia MIT. Ver archivo `LICENSE` para más detall
 ## 📧 Contacto
 
 Para preguntas o sugerencias, contactar a:
-- Email: ClaudeGDA6@netlife.net.ec
+- Email: alexminga.a@gmail.com
 
 ## 🎉 Agradecimientos
 
