@@ -1,21 +1,50 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:taekwondo_azuay/src/core/theme/elite_martial_colors.dart';
 import 'package:taekwondo_azuay/src/core/theme/elite_martial_radii.dart';
 import 'package:taekwondo_azuay/src/core/theme/elite_martial_spacing.dart';
-import 'package:taekwondo_azuay/src/features/academies/domain/entities/academy.dart';
 import 'package:taekwondo_azuay/src/features/academies/presentation/atoms/academy_photo.dart';
 
-class AcademyBottomSheet extends StatelessWidget {
+import '../../domain/entities/academy.dart';
+
+class AcademyBottomSheet extends StatefulWidget {
   const AcademyBottomSheet({super.key, required this.academy});
 
   final Academy academy;
 
   @override
+  State<AcademyBottomSheet> createState() => _AcademyBottomSheetState();
+}
+
+class _AcademyBottomSheetState extends State<AcademyBottomSheet> {
+  Future<void> _openGoogleMaps(double latitude, double longitude) async {
+    final String googleMapsUrl =
+        'https://www.google.com/maps/dir/?api=1&destination=$latitude,$longitude';
+    if (await canLaunchUrl(Uri.parse(googleMapsUrl))) {
+      await launchUrl(Uri.parse(googleMapsUrl),
+          mode: LaunchMode.externalApplication);
+    }
+  }
+
+  Future<void> _shareAcademy() async {
+    final academy = widget.academy;
+    final String shareText =
+        'Dirección: ${academy.address}\n'
+        'Teléfono: ${academy.phone}\n'
+        'Horario: ${academy.schedule}';
+    await Share.share(
+      shareText,
+      subject: 'Academia: ${academy.name}',
+    );
+  }
+
+  @override
   Widget build(BuildContext context) {
     return DraggableScrollableSheet(
-      initialChildSize: .62,
+      initialChildSize: .72,
       minChildSize: .28,
-      maxChildSize: .82,
+      maxChildSize: .72,
       builder: (context, scrollController) {
         return DecoratedBox(
           decoration: const BoxDecoration(
@@ -41,7 +70,7 @@ class AcademyBottomSheet extends StatelessWidget {
                 borderRadius: BorderRadius.circular(8),
                 child: Stack(
                   children: [
-                    AcademyPhoto(url: academy.url),
+                    AcademyPhoto(url: widget.academy.url),
                     Positioned(
                       top: 10,
                       right: 10,
@@ -54,7 +83,7 @@ class AcademyBottomSheet extends StatelessWidget {
                           padding: const EdgeInsets.symmetric(
                               horizontal: 12, vertical: 7),
                           child: Text(
-                            academy.badge,
+                            widget.academy.badge,
                             style: Theme.of(context)
                                 .textTheme
                                 .labelSmall
@@ -71,27 +100,27 @@ class AcademyBottomSheet extends StatelessWidget {
               ),
               const SizedBox(height: EliteMartialSpacing.lg),
               Text(
-                academy.name,
+                widget.academy.name,
                 style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                       color: EliteMartialColors.primary,
                       fontWeight: FontWeight.w900,
                     ),
               ),
               const SizedBox(height: EliteMartialSpacing.sm),
-              _AcademyInfoRow(icon: Icons.person_outline, text: academy.coach),
+              _AcademyInfoRow(icon: Icons.person_outline, text: widget.academy.coach),
               _AcademyInfoRow(
                 icon: Icons.location_on_outlined,
-                text: academy.address,
+                text: widget.academy.address,
                 iconColor: EliteMartialColors.secondaryContainer,
               ),
               _AcademyInfoRow(
                 icon: Icons.phone_outlined,
-                text: academy.phone,
+                text: widget.academy.phone,
                 iconColor: EliteMartialColors.secondaryContainer,
               ),
               _AcademyInfoRow(
                 icon: Icons.schedule_outlined,
-                text: academy.schedule,
+                text: widget.academy.schedule,
                 iconColor: EliteMartialColors.secondaryContainer,
               ),
               const SizedBox(height: EliteMartialSpacing.lg),
@@ -99,7 +128,7 @@ class AcademyBottomSheet extends StatelessWidget {
                 children: [
                   Expanded(
                     child: FilledButton.icon(
-                      onPressed: () {},
+                      onPressed: () => _openGoogleMaps(widget.academy.latitude, widget.academy.longitude),
                       icon: const Icon(Icons.assistant_direction_outlined,
                           size: 18),
                       label: const Text('Como llegar'),
@@ -114,7 +143,7 @@ class AcademyBottomSheet extends StatelessWidget {
                   ),
                   const SizedBox(width: EliteMartialSpacing.sm),
                   IconButton.outlined(
-                    onPressed: () {},
+                    onPressed: _shareAcademy,
                     icon: const Icon(Icons.share_outlined),
                     color: EliteMartialColors.primary,
                     padding: const EdgeInsets.all(14),

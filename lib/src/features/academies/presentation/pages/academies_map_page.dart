@@ -1,5 +1,6 @@
 import 'dart:ui' as ui;
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -70,9 +71,20 @@ class _AcademiesMapPageState extends State<AcademiesMapPage> {
                     ),
                   ),
 
-                  AcademyBottomSheet(
-                    academy: _selectedAcademy!,
-                  ),
+                  if (kIsWeb)
+                    Align(
+                      alignment: Alignment.bottomCenter,
+                      child: SizedBox(
+                        width: MediaQuery.of(context).size.width * 0.5,
+                        child: AcademyBottomSheet(
+                          academy: _selectedAcademy!,
+                        ),
+                      ),
+                    )
+                  else
+                    AcademyBottomSheet(
+                      academy: _selectedAcademy!,
+                    ),
                 ]
               ],
             );
