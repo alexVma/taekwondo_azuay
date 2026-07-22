@@ -4,6 +4,7 @@ import 'package:taekwondo_azuay/src/core/theme/elite_martial_colors.dart';
 import '../../data/datasources/event_firestore_datasource.dart';
 import '../../data/models/event_model.dart';
 import 'event_form_page.dart';
+import 'event_inscriptions_page.dart';
 
 class EventsListPage extends StatefulWidget {
   const EventsListPage({super.key});
@@ -156,6 +157,20 @@ class _EventsListPageState extends State<EventsListPage> {
                                     child: const Text('Eliminar'),
                                     onTap: () {
                                       _showDeleteDialog(event.id, event.name);
+                                    },
+                                  ),
+                                  PopupMenuItem(
+                                    child: const Text('Inscribir'),
+                                    onTap: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              EventInscriptionsPage(
+                                            eventId: event.id,
+                                          ),
+                                        ),
+                                      );
                                     },
                                   ),
                                 ],
