@@ -9,6 +9,19 @@ class AcademyPhoto extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (url.isEmpty) {
+      return SizedBox(
+        height: 145,
+        width: double.infinity,
+        child: Container(
+          color: EliteMartialColors.surfaceContainer,
+          child: const Center(
+            child: Icon(Icons.image_not_supported, size: 40),
+          ),
+        ),
+      );
+    }
+
     return SizedBox(
       height: 145,
       width: double.infinity,
@@ -27,10 +40,20 @@ class AcademyPhoto extends StatelessWidget {
           );
         },
         errorBuilder: (context, error, stackTrace) {
+          print('Error cargando imagen: $error');
+          print('URL: $url');
           return Container(
             color: EliteMartialColors.surfaceContainer,
-            child: const Center(
-              child: Icon(Icons.image_not_supported, size: 40),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Icon(Icons.image_not_supported, size: 40),
+                const SizedBox(height: 8),
+                Text(
+                  'Error cargando imagen',
+                  style: Theme.of(context).textTheme.bodySmall,
+                ),
+              ],
             ),
           );
         },

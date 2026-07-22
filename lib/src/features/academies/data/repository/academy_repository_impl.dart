@@ -20,20 +20,25 @@ class AcademyRepositoryImpl implements AcademyRepository {
     final models = academies
         .map(
           (e) => AcademyModel(
-        id: e.id,
-        name: e.name,
-        url: e.url,
-        coach: e.coach,
-        address: e.address,
-        phone: e.phone,
-        schedule: e.schedule,
-        badge: e.badge,
-        latitude: e.latitude,
-        longitude: e.longitude,
-      ),
-    )
+            id: e.id,
+            name: e.name,
+            url: e.url,
+            coach: e.coach,
+            address: e.address,
+            phone: e.phone,
+            schedule: e.schedule,
+            badge: e.badge,
+            latitude: e.latitude,
+            longitude: e.longitude,
+            type: e.type,
+            competitionLevel: e.competitionLevel,
+            status: e.status,
+            representative: e.representative,
+            email: e.email,
+          ),
+        )
         .toList();
 
-    await datasource.saveAcademies(models);
+    await datasource.saveAcademies(models as List<AcademyModel>);
   }
 }
