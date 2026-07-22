@@ -1,6 +1,11 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:taekwondo_azuay/src/core/theme/elite_martial_spacing.dart';
 import 'package:taekwondo_azuay/src/features/home/presentation/atoms/brand_mark.dart';
+import 'package:taekwondo_azuay/src/features/profile/presentation/dialogs/login_dialog.dart';
+import 'package:taekwondo_azuay/src/features/profile/presentation/pages/profile_page.dart';
+import 'package:taekwondo_azuay/src/features/profile/presentation/cubit/auth_cubit.dart';
 
 import '../../../../core/theme/text_style.dart';
 
@@ -24,7 +29,31 @@ class TopBar extends StatelessWidget implements PreferredSizeWidget {
             ),
           ),
           const SizedBox(width: EliteMartialSpacing.base),
-          const ProfileAvatar(),
+          kIsWeb
+              ? InkWell(
+                  onTap: () {
+                    showDialog(
+                      context: context,
+                      builder: (context) => BlocProvider.value(
+                        value: context.read<AuthCubit>(),
+                        child: const LoginDialog(),
+                      ),
+                    ).then((user) {
+                      if (user != null) {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => BlocProvider.value(
+                              value: context.read<AuthCubit>(),
+                              child: const ProfilePage(),
+                            ),
+                          ),
+                        );
+                      }
+                    });
+                  },
+                  child: const ProfileAvatar(),
+                )
+              : const ProfileAvatar(),
         ],
       ),
     );
