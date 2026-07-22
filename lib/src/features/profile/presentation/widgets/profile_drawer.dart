@@ -5,6 +5,7 @@ import 'package:taekwondo_azuay/src/core/theme/elite_martial_colors.dart';
 import 'package:taekwondo_azuay/src/features/academies/presentation/cubit/academies_management_cubit.dart';
 import 'package:taekwondo_azuay/src/features/academies/presentation/pages/academies_management_page.dart';
 import 'package:taekwondo_azuay/src/features/events/presentation/pages/events_list_page.dart';
+import 'package:taekwondo_azuay/src/features/athletes/presentation/pages/athletes_management_page.dart';
 import '../../data/models/user_model.dart';
 import '../cubit/auth_cubit.dart';
 import '../cubit/users_cubit.dart';
@@ -83,6 +84,19 @@ class ProfileDrawer extends StatelessWidget {
                 context,
                 MaterialPageRoute(
                   builder: (context) => const EventsListPage(),
+                ),
+              );
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.sports_martial_arts),
+            title: const Text('Gestión de Deportistas'),
+            onTap: () {
+              Navigator.pop(context);
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const AthletesManagementPage(),
                 ),
               );
             },
