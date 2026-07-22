@@ -11,6 +11,13 @@ class TournamentListCard extends StatelessWidget {
 
   final TournamentEvent event;
 
+  bool _isEventFinished(DateTime date) {
+    final today = DateTime.now();
+    final eventDate = DateTime(date.year, date.month, date.day);
+    final todayDate = DateTime(today.year, today.month, today.day);
+    return eventDate.isBefore(todayDate);
+  }
+
   @override
   Widget build(BuildContext context) {
     return DecoratedBox(
@@ -29,9 +36,9 @@ class TournamentListCard extends StatelessWidget {
                 width: 86,
                 height: 86,
                 child: TournamentImage(
-                  seed: event.imageSeed,
                   height: 86,
-                  icon: event.status == TournamentStatus.finished
+                  imageUrl: event.imageUrl,
+                  icon: _isEventFinished(event.eventDate)
                       ? Icons.sports_gymnastics
                       : Icons.workspace_premium,
                 ),
@@ -45,7 +52,7 @@ class TournamentListCard extends StatelessWidget {
                 children: [
                   Row(
                     children: [
-                      TournamentStatusBadge(status: event.status),
+                      TournamentStatusBadge(date: event.eventDate),
                       const SizedBox(width: EliteMartialSpacing.sm),
                       Text(
                         event.date,

@@ -43,13 +43,6 @@ class ProfileDrawer extends StatelessWidget {
             },
           ),
           ListTile(
-            leading: const Icon(Icons.settings),
-            title: const Text('Configuración'),
-            onTap: () {
-              Navigator.pop(context);
-            },
-          ),
-          ListTile(
             leading: const Icon(Icons.people),
             title: const Text('Gestión de Usuarios'),
             onTap: () {

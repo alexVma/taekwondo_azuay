@@ -33,11 +33,11 @@ class FeaturedTournamentCard extends StatelessWidget {
           children: [
             Stack(
               children: [
-                TournamentImage(seed: event.imageSeed, height: 134),
+                TournamentImage(height: 150, imageUrl: event.imageUrl),
                 Positioned(
                   left: 18,
                   top: 16,
-                  child: TournamentStatusBadge(status: event.status),
+                  child: TournamentStatusBadge(date: event.eventDate),
                 ),
               ],
             ),
