@@ -4,6 +4,7 @@ import 'package:get_it/get_it.dart';
 import 'package:taekwondo_azuay/src/core/theme/elite_martial_colors.dart';
 import 'package:taekwondo_azuay/src/features/academies/presentation/cubit/academies_management_cubit.dart';
 import 'package:taekwondo_azuay/src/features/academies/presentation/pages/academies_management_page.dart';
+import 'package:taekwondo_azuay/src/features/events/presentation/pages/events_list_page.dart';
 import '../../data/models/user_model.dart';
 import '../cubit/auth_cubit.dart';
 import '../cubit/users_cubit.dart';
@@ -76,6 +77,19 @@ class ProfileDrawer extends StatelessWidget {
                     value: GetIt.instance<AcademiesManagementCubit>(),
                     child: const AcademiesManagementPage(),
                   ),
+                ),
+              );
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.event),
+            title: const Text('Gestión de Eventos'),
+            onTap: () {
+              Navigator.pop(context);
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const EventsListPage(),
                 ),
               );
             },
