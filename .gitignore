@@ -126,3 +126,4 @@ test/coverage/
 .DS_Store
 Thumbs.db
 .fvmrc
+lib/firebase_options.dart
